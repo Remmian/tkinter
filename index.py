@@ -1,10 +1,16 @@
 from tkinter import *
 from tkinter import messagebox
-from shop import ShopWindow
+from templates.shop import shopWindow
+from templates.register import RegisterWindow
 
+fontOptions = ('Helvetica', 14, 'normal')
+
+def openRegister():
+    root.destroy()
+    RegisterWindow()
 
 def check_pass():
-    username = user_entry.get()
+    username = user_entry.get().strip()
     userPassword = pass_entry.get()
 
     routeFile = f"./src/users/{username}.txt"
@@ -15,14 +21,13 @@ def check_pass():
             password = lines[0]
             if userPassword == password:
                 root.destroy()
-                ShopWindow()
+                shopWindow()
             else:
                 messagebox.showwarning(
                     'Login Page', 'Contraseña incorrecta')
     except:
         messagebox.showwarning(
             'Login Page', 'Usuario o contraseña incorrectos')
-
 
 def loginWindow():
     global user_entry
@@ -46,10 +51,11 @@ def loginWindow():
 
     # Entry username
     user_entry = Entry(root, font=fontOptions)
+    user_entry.focus_set()
     user_entry.place(x=184, y=216, width=200, height=25)
 
     # Entry password
-    pass_entry = Entry(root, font=fontOptions)
+    pass_entry = Entry(root, font=fontOptions, show="*")
     pass_entry.place(x=184, y=316, width=200, height=25)
 
     # Button Enter
@@ -60,14 +66,11 @@ def loginWindow():
 
     # Button Enter
     buttonRegister = Button(root, text='Registrarse', font=fontOptions,
-                            bg="black", fg="white")
+                            bg="black", fg="white", command=openRegister)
 
     buttonRegister.place(x=193, y=503, width=220, height=36)
 
     root.mainloop()
-
-
-fontOptions = ('Helvetica', 14, 'normal')
 
 if __name__ == "__main__":
     loginWindow()

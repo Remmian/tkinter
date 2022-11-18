@@ -1,10 +1,8 @@
-# import tkinter
 from tkinter import *
 
 # Creamos una ventana para las ventas
-def ShopWindow():
-    root = Tk(className='ShopWindow')
-    # root = tkinter.Tk()
+def shopWindow():
+    root = Tk(className='shopWindow')
     root.title("Login")
 
     # Tamaño de la ventana
@@ -15,11 +13,10 @@ def ShopWindow():
     root.resizable(False, False)  # No se puede redimensionar
 
     # Label
-    Label(root, text='Username').place(x=10, y=10)
-    # tools.label(root, [50, 50], "Ingrese su nombre")
+    Label(root, text='Bienvenid@ a la página de ventas').place(x=10, y=10)
 
     root.mainloop()
 
 
 if __name__ == "__main__":
-    ShopWindow()
+    shopWindow()
