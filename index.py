@@ -1,13 +1,16 @@
 from tkinter import *
 from tkinter import messagebox
+
 from templates.shop import shopWindow
 from templates.register import RegisterWindow
 
 fontOptions = ('Helvetica', 14, 'normal')
 
+
 def openRegister():
     root.destroy()
     RegisterWindow()
+
 
 def check_pass():
     username = user_entry.get().strip()
@@ -18,16 +21,20 @@ def check_pass():
     try:
         with open(routeFile, "r") as file:
             lines = file.readlines()
-            password = lines[0]
-            if userPassword == password:
+            fields = lines[0].split("|")
+            fieldPassword = fields[0].split(":")[1].strip()
+
+            if userPassword == fieldPassword:
                 root.destroy()
                 shopWindow()
+
             else:
                 messagebox.showwarning(
                     'Login Page', 'Contraseña incorrecta')
-    except:
+    except FileNotFoundError:
         messagebox.showwarning(
             'Login Page', 'Usuario o contraseña incorrectos')
+
 
 def loginWindow():
     global user_entry
@@ -36,13 +43,9 @@ def loginWindow():
 
     root = Tk(className='Login')
 
+    # Agregamos un background image
     imagen = PhotoImage(file="./src/img/login.png")
-
-    # Con Label y la opción image, puedes mostrar una imagen en el widget:
     background = Label(image=imagen)
-
-    # Con place puedes organizar el widget de la imagen posicionandolo
-    # donde lo necesites (relwidth y relheight son alto y ancho en píxeles):
     background.place(x=0, y=0, relwidth=1, relheight=1)
 
     # Tamaño de la ventana
@@ -64,13 +67,14 @@ def loginWindow():
 
     buttonEnter.place(x=193, y=375, width=210, height=36)
 
-    # Button Enter
+    # Button Register
     buttonRegister = Button(root, text='Registrarse', font=fontOptions,
                             bg="black", fg="white", command=openRegister)
 
     buttonRegister.place(x=193, y=503, width=220, height=36)
 
     root.mainloop()
+
 
 if __name__ == "__main__":
     loginWindow()
