@@ -1,8 +1,9 @@
 from tkinter import *
-# from tkinter import messagebox
 from tkinter import ttk
 from src.model.clothes import clothesAvailable, sizesAvailable
 from src.plugins.widgets import Widgets
+from src.plugins.MainMenuFunction import MainFunctions
+
 
 # Variables necesarias
 count = 0
@@ -19,11 +20,11 @@ def display_selection():
                 text=f'{count}', values=(ropa, size, cantidad))
 
     count += 1
-    # tree.insert(parent='', index=0, iid=0, text='',
-    #             values=(ropa, size, cantidad))
 
 
 # Creamos una ventana para las ventas
+
+
 def shopWindow():
     # Variables globales
     global typeOfClothing
@@ -34,7 +35,11 @@ def shopWindow():
     root = Tk(className='shopWindow')
     # Creamos un objeto de la clase Widgets
     widgets = Widgets(root)
+    functions = MainFunctions(root)
     root.title("Ventas")
+
+    # Menu top de la ventana
+    widgets.createAMainMenu("Abrir Ventana de Ventas 2", functions.openSales , functions.closeWindow)
 
     # Agregamos un background image
     imagen = PhotoImage(file=f"{widgets.home}/src/img/sales.png")
@@ -52,10 +57,6 @@ def shopWindow():
     # Creamos un combobox para el tamaño de prendas
     sizeOfClothing = widgets.comboBox(sizesAvailable)
     sizeOfClothing.place(x=137, y=325)
-
-    # widget para seleccionar la cantidad
-    # quantity = Scale(root, from_=1, to=10,
-    #                  orient=HORIZONTAL)
 
     quantity = widgets.scale(1, 20, HORIZONTAL)
     quantity.place(x=137, y=423, width=200, height=40)
