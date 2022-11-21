@@ -288,6 +288,8 @@ def salesWindow():
     lblcombotalla.place(x=50, y=140)
     lblcantidad = Label(root, text="Ingrese la cantidad de prendas:")
     lblcantidad.place(x=50, y=170)
+
+    
     txtnombre = Entry(root, width=20)
     txtnombre.place(x=230, y=50)
     txtdni = Entry(root, width=20)

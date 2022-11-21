@@ -1,36 +1,249 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from src.model.clothes import clothesAvailable, sizesAvailable
 from src.plugins.widgets import Widgets
 from src.plugins.MainMenuFunction import MainFunctions
 
 
-# Variables necesarias
-count = 0
+def borrar():
+    areatexto.delete("1.0", "end")
 
 
-def display_selection():
-    global count
-    # Obtenemos los datos de los combobox y scale
-    ropa = typeOfClothing.get()
-    size = sizeOfClothing.get()
-    cantidad = quantity.get()
+def calcular():
+    prenda = comboprenda.get()
+    talla = combotalla.get()
+    cantcad = txtcantidad.get()
+    # cuadro de texto mostrando error por si no entra cada punto pedido por teclado
 
-    tree.insert(parent='', index='end', iid=count,
-                text=f'{count}', values=(ropa, size, cantidad))
+    if (len(prenda) == 0):
+        messagebox.showinfo(
+            message="Seleccione el tipo prenda!!", title="Error")
+    elif (len(talla) == 0):
+        messagebox.showinfo(message="Seleccione la talla!!", title="Error")
+    elif (len(cantcad) == 0):
+        messagebox.showinfo(
+            message="Ingrese ingrese la cantidad de prendas!!", title="Error")
+    else:
+        # Aqui empezamos a ejecutar los descuentos del enunciado conjunto con el precio de cada prenda
+        cant = int(cantcad)
+        i = 0
 
-    count += 1
+        if ((prenda == "Jeans") and (talla == "S")):
+            precio = 45.0
+            pagar = precio*cant
+            areatexto.insert(
+                1.0, "\nLa compra por los jeans es : {}".format(pagar))
+        elif ((prenda == "Jeans") and (talla == "M")):
+            precio = 53.0
+            pagar = precio*cant
+            areatexto.insert(
+                1.0, "\nLa compra por los jeans es : {}".format(pagar))
+        elif ((prenda == "Jeans") and (talla == "L")):
+            precio = 60.0
+            pagar = precio * cant
+            areatexto.insert(
+                1.0, "\nLa compra por los jeans es : {}".format(pagar))
+        elif ((prenda == "Jeans") and (talla == "XL")):
+            precio = 70.0
+            pagar = precio * cant
+            areatexto.insert(
+                1.0, "\nLa compra por los jeans es : {}".format(pagar))
+        elif ((prenda == "Jeans") and (talla == "XXL")):
+            precio = 85.0
+            compra = precio*cant
+            if cant >= 3:
+                dscto = compra*0.08
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl descuento en esta compra es : {}".format(dscto))
+                areatexto.insert(
+                    1.0, "\nLa compra por los jeans es : {}".format(pagar))
+            elif cant < 3:
+                areatexto.insert(
+                    1.0, "\nLa compra por los jeans es : {}".format(compra))
 
-
-# Creamos una ventana para las ventas
+        if ((prenda == "Faldas") and (talla == "S")):
+            precio = 30.0
+            compra = precio*cant
+            if cant >= 3:
+                dscto = cant*3
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nLa compra por de faldas por mayor es : {}".format(pagar))
+            elif cant < 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar de las faldas es : {}".format(compra))
+        elif ((prenda == "Faldas") and (talla == "M")):
+            precio = 35.0
+            compra = precio*cant
+            if cant >= 3:
+                dscto = cant*3
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nLa compra por de faldas por mayor es : {}".format(pagar))
+            elif cant < 3:
+                areatexto.insert(
+                    1.0, "\nLEl importe a pagar de las faldas es : {}".format(compra))
+        elif ((prenda == "Faldas") and (talla == "L")):
+            precio = 42.0
+            compra = precio*cant
+            if cant >= 3:
+                dscto = cant*3
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nLa compra por de faldas por mayor es : {}".format(pagar))
+            elif cant < 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar de las faldas es : {}".format(compra))
+        elif ((prenda == "Faldas") and (talla == "XL")):
+            precio = 48.0
+            compra = precio*cant
+            if cant >= 3:
+                dscto = cant*3
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nLa compra por de faldas por mayor es : {}".format(pagar))
+            elif cant < 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar de las faldas es : {}".format(compra))
+        elif ((prenda == "Faldas") and (talla == "XXL")):
+            precio = 53.0
+            compra = precio*cant
+            if cant >= 3:
+                dscto = cant*3
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nLa compra por de faldas por mayor es : {}".format(pagar))
+            elif cant < 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar de las faldas es : {}".format(compra))
+        if ((prenda == "Shorts") and (talla == "S")):
+            precio = 33.0
+            compra = precio*cant
+            if compra > 150:
+                dscto = compra*0.06
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(pagar))
+            elif compra <= 150:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Shorts") and (talla == "M")):
+            precio = 38.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Shorts") and (talla == "L")):
+            precio = 45.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Shorts") and (talla == "XL")):
+            precio = 55.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Shorts") and (talla == "XXL")):
+            precio = 60.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        if ((prenda == "Tops") and (talla == "S")):
+            precio = 25.0
+            compra = precio*cant
+            if cant/2 == 0:
+                canti = cant/2
+                compra = precio*canti
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Tops") and (talla == "M")):
+            precio = 28.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Tops") and (talla == "L")):
+            precio = 33.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Tops") and (talla == "XL")):
+            precio = 38.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Tops") and (talla == "XXL")):
+            precio = 45.0
+            compra = precio*cant
+            areatexto.insert(
+                1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        if ((prenda == "Casacas") and (talla == "S")):
+            precio = 68.0
+            compra = precio*cant
+            if cant > 3:
+                dscto = compra*0.05
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(pagar))
+            elif cant <= 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Casacas") and (talla == "M")):
+            precio = 73.0
+            compra = precio*cant
+            if cant > 3:
+                dscto = compra*0.05
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(pagar))
+            elif cant <= 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Casacas") and (talla == "L")):
+            precio = 80.0
+            compra = precio*cant
+            if cant > 3:
+                dscto = compra*0.05
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(pagar))
+            elif cant <= 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Casacas") and (talla == "XL")):
+            precio = 90.0
+            compra = precio*cant
+            if cant > 3:
+                dscto = compra*0.05
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(pagar))
+            elif cant <= 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        elif ((prenda == "Casacas") and (talla == "XXL")):
+            precio = 105.0
+            compra = precio*cant
+            if cant > 3:
+                dscto = compra*0.05
+                pagar = compra-dscto
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(pagar))
+            elif cant <= 3:
+                areatexto.insert(
+                    1.0, "\nEl importe a pagar por los shorts es : {}".format(compra))
+        if ((compra > 400) and (pagar > 400)):
+            areatexto.insert(
+                1.0, "\nPor una compra mayor a S/.400 usted acaba de recibir un vale de descuento del 10% en su siguiente compra : {}")
 
 
 def shopWindow():
     # Variables globales
-    global typeOfClothing
-    global sizeOfClothing
-    global quantity
-    global tree
+    global areatexto
+    global txtdni
+    global comboprenda
+    global combotalla
+    global txtcantidad
 
     root = Tk(className='shopWindow')
     # Creamos un objeto de la clase Widgets
@@ -39,10 +252,11 @@ def shopWindow():
     root.title("Ventas")
 
     # Menu top de la ventana
-    widgets.createAMainMenu("Abrir Ventana de Ventas 2", functions.openSales , functions.closeWindow)
+    widgets.createAMainMenu("Abrir Ventana de Ventas 2",
+                            functions.openSales, functions.closeWindow)
 
     # Agregamos un background image
-    imagen = PhotoImage(file=f"{widgets.home}/src/img/sales.png")
+    imagen = PhotoImage(file=f"{widgets.home}/src/img/shop.png")
     background = Label(image=imagen)
     background.place(x=0, y=0, relwidth=1, relheight=1)
 
@@ -50,35 +264,38 @@ def shopWindow():
     root.geometry("950x650")
     root.resizable(False, False)  # No se puede redimensionar
 
-    # Creamos un combobox para las prendas
-    typeOfClothing = widgets.comboBox(clothesAvailable)
-    typeOfClothing.place(x=137, y=233)
+    xposition = 236
+    widthEntry = 220
+    hightEntry = 30
 
-    # Creamos un combobox para el tamaño de prendas
-    sizeOfClothing = widgets.comboBox(sizesAvailable)
-    sizeOfClothing.place(x=137, y=325)
+    txtnombre = Entry(root, width=20)
+    txtnombre.place(x=xposition, y=177, width=widthEntry, height=hightEntry)
 
-    quantity = widgets.scale(1, 20, HORIZONTAL)
-    quantity.place(x=137, y=423, width=200, height=40)
+    txtdni = Entry(root, width=20)
+    txtdni.place(x=xposition, y=240, width=widthEntry, height=hightEntry)
 
-    tree = ttk.Treeview(root)
-    tree['columns'] = ('Ropa', 'Talla', 'Cantidad')
-    tree.column('#0', width=0, stretch=NO)
-    tree.column('Ropa', anchor=CENTER, width=80)
-    tree.column('Talla', anchor=CENTER, width=80)
-    tree.column('Cantidad', anchor=CENTER, width=80)
+    comboprenda = widgets.comboBox(clothesAvailable)
+    comboprenda.place(x=xposition, y=300, width=widthEntry, height=hightEntry)
 
-    tree.heading('#0', text='', anchor=CENTER)
-    tree.heading('Ropa', text='Ropa', anchor=CENTER)
-    tree.heading('Talla', text='Talla', anchor=CENTER)
-    tree.heading('Cantidad', text='Cantidad', anchor=CENTER)
-    tree.place(x=459, y=121, width=450, height=480)
+    combotalla = widgets.comboBox(sizesAvailable)
+    combotalla.place(x=xposition, y=360, width=widthEntry, height=hightEntry)
 
-    button = widgets.button("Agregar Producto", display_selection)
-    button.place(x=93, y=535)
+    txtcantidad = Entry(root, width=20)
+    txtcantidad.place(x=xposition, y=420, width=widthEntry, height=hightEntry)
+
+    areatexto = Text(root)
+    areatexto.config(width=40, height=10)
+    areatexto.place(x=520, y=121, width=400, height=460)
+
+    button = widgets.button("Ejecutar", calcular)
+    button.place(x=120, y=535)
+
+    button = widgets.button("Borrar", borrar)
+    button.place(x=220, y=535)
 
     root.mainloop()
 
 
 if __name__ == "__main__":
     shopWindow()
+
