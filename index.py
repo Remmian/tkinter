@@ -4,6 +4,9 @@ from tkinter import messagebox
 from templates.shop import shopWindow
 from templates.register import RegisterWindow
 
+from src.plugins.PdfCreator import main
+
+
 fontOptions = ('Helvetica', 14, 'normal')
 
 

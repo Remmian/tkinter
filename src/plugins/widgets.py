@@ -47,10 +47,3 @@ class Widgets:
         menubar.add_cascade(label="Archivos", menu=filemenu)
 
         self.master.config(menu=menubar)
-
-    # def setBackgroundImage(self, imageRoute):
-    #     print(imageRoute)
-    #     imagen = PhotoImage(file=imageRoute)
-    #     background = Label(image=imagen)
-    #     background.place(x=0, y=0, relwidth=1, relheight=1)
-    #     return background
